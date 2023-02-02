@@ -1,0 +1,18 @@
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import *
+from sklearn.model_selection import *
+from sklearn.tree import *
+from sklearn.ensemble import RandomForestRegressor
+
+features = pd.read_csv('csv-file', ';', usecols=['..'])
+features.head(72)
+labels = np.array(features['..'])
+features= features.drop('..', axis = 1)
+feature_list = list(features.columns)
+features = np.array(features)
+
+train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.2, random_state = 7)
+
+rf = RandomForestRegressor(n_estimators = 350,max_depth = 15,max_features = 'log2', random_state = 7)
+rf.fit(train_features, train_labels)
